@@ -1,53 +1,19 @@
+"use client";
+import Header from "@/components/header";
 import { dummyJobs } from "@/lib/dmmy";
-import Image from "next/image"; 
+import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { BiBaguette, BiLocationPlus, BiMoney, BiSave, BiSearch } from "react-icons/bi";
 import { BsBag, BsJournalBookmark } from "react-icons/bs";
 import { FiWatch } from "react-icons/fi";
 import { PiParagraph } from "react-icons/pi";
 
 export default function Home() {
+
   return (
     <div className="flex flex-col w-full gap-6 ">
-      {/* Header  */}
-     <header className="flex justify-between items-center h-[60px] px-6 shadow-md bg-white">
-      {/* Logo / Title */}
-      <span className="font-bold text-xl text-blue-600 cursor-pointer">Job Portal</span>
-
-      {/* Navigation Links */}
-      <nav className="flex gap-6">
-        {[
-    { name: "Home", url: "/" },
-    { name: "Jobs", url: "/jobs" },
-    { name: "About Us", url: "/about" },
-    { name: "Contact Us", url: "/contact" },
-  ].map((item, index) => (
-           <Link
-            key={index}
-            href={item.url}
-            className="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200"
-          >
-            {item.name}
-          </Link>
-        ))}
-      </nav>
-
-      {/* Action Buttons */}
-      <div className="flex gap-3">
-        <Link
-          href="/register"
-          className="px-4 py-1 rounded-lg text-sm font-medium border border-blue-600 text-blue-600 hover:bg-blue-50 transition duration-200"
-        >
-          Register
-        </Link>
-        <Link
-          href="/login"
-          className="px-4 py-1 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition duration-200"
-        >
-          Login
-        </Link>
-      </div>
-    </header>
+      <Header />
       {/* Search bar  */}
       <div className="flex justify-center ">
 
@@ -65,40 +31,60 @@ export default function Home() {
 
       </div>
       {/* Job lists  */}
-      <section className="flex px-14 w-full flex-col gap-5 pb-10">
+      <section className="flex px-14 w-full flex-col gap-5 pb-10 ">
         {dummyJobs.map((job, index) => (
-          <div key={index} className="rounded-xl shadow-sm flex flex-col p-5 gap-3 hover:shadow-lg transition duration-200 border-t border-gray-200">
-            <div className="w-full flex justify-between items-center">
-              <span className="text-blue-500 bg-blue-500/20 px-2 rounded-sm p-1 text-xs">{job.timeAgo}</span>
-              <BiSave className="text-xl text-gray-500 cursor-pointer" title="Save Job" />
-            </div>
-            <div className="flex gap-2">
-              <BsBag className="text-xl text-gray-500 mt-1" />
-              <div className="flex flex-col">
-                <h1 className="font-bold text-lg">{job.title}</h1>
-                <span className="text-sm text-gray-600">{job.description}</span>
-              </div>
-            </div>
-            <div className="flex gap-2 justify-between items-center flex-wrap">
-              <div className="flex gap-4 flex-wrap">
-                <div className="flex items-center gap-2 cursor-pointer">
-                  <FiWatch className="text-blue-500 text-xl" />
-                  <span className="text-sm" style={{ color: "blue" }}>{job.company}</span>
-                </div>
-                <div className="flex items-center gap-2 cursor-pointer">
-                  <FiWatch className="text-blue-500 text-xl" />
-                  <span className="text-sm" style={{ color: "blue" }}>{job.timeAgo}</span>
-                </div>
-                <div className="flex items-center gap-2 cursor-pointer">
-                  <BiMoney className="text-green-500 text-xl" />
-                  <span className="text-sm" style={{ color: "green" }}>{job.salary}</span>
-                </div>
-                <div className="flex items-center gap-2 cursor-pointer">
-                  <BiLocationPlus className="text-blue-500 text-xl" />
-                  <span className="text-sm" style={{ color: "blue" }}>{job.location}</span>
-                </div>
-              </div>
-              <button className="
+          <JobSection job={job} index={index} />
+        ))}
+      </section>
+    </div>
+  );
+}
+
+
+
+export const JobSection = ({ job, index }: any) => {
+
+  const router = useRouter();
+
+  return (
+    <div key={index} className="rounded-xl shadow-sm flex flex-col p-5 gap-3 hover:shadow-lg transition duration-200 border-t border-gray-200 bg-green-100/40">
+      <div className="w-full flex justify-between items-center">
+        <span className="text-blue-500 bg-blue-500/20 px-2 rounded-sm p-1 text-xs">{job.timeAgo}</span>
+        <BiSave className="text-xl text-gray-500 cursor-pointer" title="Save Job" />
+      </div>
+      <div className="flex gap-2">
+        <BsBag className="text-xl text-gray-500 mt-1" />
+        <div className="flex flex-col">
+          <h1 className="font-bold text-lg">{job.title}</h1>
+          <span className="text-sm text-gray-600">{job.description}</span>
+        </div>
+      </div>
+      <div className="flex gap-2 justify-between items-center flex-wrap">
+        <div className="flex gap-4 flex-wrap">
+          <div className="flex items-center gap-2 cursor-pointer">
+            <FiWatch className="text-blue-500 text-xl" />
+            <span className="text-sm" style={{ color: "blue" }}>{job.company}</span>
+          </div>
+          <div className="flex items-center gap-2 cursor-pointer">
+            <FiWatch className="text-blue-500 text-xl" />
+            <span className="text-sm" style={{ color: "blue" }}>{job.timeAgo}</span>
+          </div>
+          <div className="flex items-center gap-2 cursor-pointer">
+            <BiMoney className="text-green-500 text-xl" />
+            <span className="text-sm" style={{ color: "green" }}>{job.salary}</span>
+          </div>
+          <div className="flex items-center gap-2 cursor-pointer">
+            <BiLocationPlus className="text-blue-500 text-xl" />
+            <span className="text-sm" style={{ color: "blue" }}>{job.location}</span>
+          </div>
+        </div>
+        <button
+
+          onClick={() => {
+            router.push("/user/view-job");
+          }}
+
+          className="
               bg-green-100 
               text-green-800 
               text-sm 
@@ -113,12 +99,9 @@ export default function Home() {
               shadow-sm
               focus:outline-none
             ">
-                View Job Details
-              </button>
-            </div>
-          </div>
-        ))}
-      </section>
+          View Job Details
+        </button>
+      </div>
     </div>
-  );
+  )
 }
