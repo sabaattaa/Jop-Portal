@@ -1,45 +1,48 @@
-import Link from 'next/link'
 import React from 'react'
+import Link from 'next/link'
+import { IoMdNotificationsOutline } from 'react-icons/io'
+import { IoPersonCircleOutline } from 'react-icons/io5'
+import { TiMessages } from 'react-icons/ti'
 
 const Header = () => {
-  return ( 
-         <header className="flex justify-between items-center h-[60px] px-6   bg-green-100/60 ">
-           {/* Logo / Title */}
-           <span className="font-bold text-xl text-green-600 cursor-pointer">Remote Jobs</span>
-   
-           {/* Navigation Links */}
-           <nav className="flex gap-6">
-             {[ 
-               { name: "Jobs", url: "/" },
-               { name: "Saved Jobs", url: "/saved-jobs" },
-               { name: "Shared Jobs", url: "/shared-jobs" },
-             ].map((item, index) => (
-               <Link
-                 key={index}
-                 href={item.url}
-                 className="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200"
-               >
-                 {item.name}
-               </Link>
-             ))}
-           </nav>
-   
-           {/* Action Buttons */}
-           <div className="flex gap-3">
-             <Link
-               href="/register"
-               className="px-4 py-1 rounded-lg text-sm font-medium border border-blue-600 text-blue-600 hover:bg-blue-50 transition duration-200"
-             >
-               Register
-             </Link>
-             <Link
-               href="/login"
-               className="px-4 py-1 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition duration-200"
-             >
-               Login
-             </Link>
-           </div>
-         </header>
+  return (
+    <header className="flex justify-between items-center h-[60px] px-6 bg-green-100/60 ">
+      <span className="font-bold text-xl text-green-600 cursor-pointer">Remote Jobs</span>
+      <nav className="flex gap-6">
+        {[
+          { name: "Jobs", url: "/" },
+          { name: "Applied Jobs", url: "/applied-jobs" },
+          { name: "Saved Jobs", url: "/saved-jobs" },
+          { name: "Shared Jobs", url: "/shared-jobs" },
+        ].map((item, index) => (
+          <Link
+            key={index}
+            href={"#"}
+            // href={item.url}
+            className="text-gray-600 hover:text-green-500 font-medium transition-colors duration-200"
+          >
+            {item.name}
+          </Link>
+        ))}
+      </nav>
+      <div className="flex gap-3">
+        {[
+          { id: 1, icon: TiMessages, title: "Messages", url: "/jobs/messages" },
+          { id: 2, icon: IoMdNotificationsOutline, title: "Notifications", url: "/jobs/notifications" },
+          { id: 3, icon: IoPersonCircleOutline, title: "Profile", url: "/jobs/profile" },
+        ].map(({ id, icon: Icon, title, url }) => (
+          <Link
+          key={id}
+            href={url}>
+            <Icon
+              key={id}
+              title={title}
+              className="text-2xl text-gray-600 hover:text-green-500 cursor-pointer"
+            />
+          </Link>
+        ))}
+      </div>
+    </header>
   )
 }
 

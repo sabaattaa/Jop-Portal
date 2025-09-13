@@ -1,107 +1,94 @@
-"use client";
-import Header from "@/components/header";
-import { dummyJobs } from "@/lib/dmmy";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { BiBaguette, BiLocationPlus, BiMoney, BiSave, BiSearch } from "react-icons/bi";
-import { BsBag, BsJournalBookmark } from "react-icons/bs";
-import { FiWatch } from "react-icons/fi";
-import { PiParagraph } from "react-icons/pi";
-
-export default function Home() {
-
-  return (
-    <div className="flex flex-col w-full gap-6 ">
-      <Header />
-      {/* Search bar  */}
-      <div className="flex justify-center ">
-
-        <div className="bg-gray-100 rounded-full p-2 px-3 flex gap-2 items-center">
-          <BiSearch className="text-xl text-gray-500" />
-          <input
-            placeholder="Search here "
-            className="w-full md:w-2xl outline-none border-none text-gray-500" />
-
-          <span className="text-gray-600 pe-5">|</span>
-          <span className="text-gray-600 pe-5" title="Location">Remote</span>
-        </div>
-
-
-
-      </div>
-      {/* Job lists  */}
-      <section className="flex px-14 w-full flex-col gap-5 pb-10 ">
-        {dummyJobs.map((job, index) => (
-          <JobSection job={job} index={index} />
-        ))}
-      </section>
-    </div>
-  );
-}
-
-
-
-export const JobSection = ({ job, index }: any) => {
+"use client"
+import React from 'react'
+import Button from '@/components/button'
+import Input from '@/components/input'
+import { signInSchema } from '@/lib/schemas'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form' 
+const Signin = () => {
 
   const router = useRouter();
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
+    resolver: yupResolver(signInSchema),
+  });
+
+
+
+  const onSubmit=(data:any)=>{
+    console.log("data",data);
+
+  }
 
   return (
-    <div key={index} className="rounded-xl shadow-sm flex flex-col p-5 gap-3 hover:shadow-lg transition duration-200 border-t border-gray-200 bg-green-100/40">
-      <div className="w-full flex justify-between items-center">
-        <span className="text-blue-500 bg-blue-500/20 px-2 rounded-sm p-1 text-xs">{job.timeAgo}</span>
-        <BiSave className="text-xl text-gray-500 cursor-pointer" title="Save Job" />
-      </div>
-      <div className="flex gap-2">
-        <BsBag className="text-xl text-gray-500 mt-1" />
-        <div className="flex flex-col">
-          <h1 className="font-bold text-lg">{job.title}</h1>
-          <span className="text-sm text-gray-600">{job.description}</span>
+    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-green-100 via-white to-green-100">
+      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md">
+        {/* Heading */}
+        <div className="mb-6 text-center">
+          <h1 className="text-2xl font-bold text-gray-800">Welcome Back </h1>
+          <p className="text-gray-500 text-sm">Sign in to explore new opportunities</p>
         </div>
-      </div>
-      <div className="flex gap-2 justify-between items-center flex-wrap">
-        <div className="flex gap-4 flex-wrap">
-          <div className="flex items-center gap-2 cursor-pointer">
-            <FiWatch className="text-blue-500 text-xl" />
-            <span className="text-sm" style={{ color: "blue" }}>{job.company}</span>
-          </div>
-          <div className="flex items-center gap-2 cursor-pointer">
-            <FiWatch className="text-blue-500 text-xl" />
-            <span className="text-sm" style={{ color: "blue" }}>{job.timeAgo}</span>
-          </div>
-          <div className="flex items-center gap-2 cursor-pointer">
-            <BiMoney className="text-green-500 text-xl" />
-            <span className="text-sm" style={{ color: "green" }}>{job.salary}</span>
-          </div>
-          <div className="flex items-center gap-2 cursor-pointer">
-            <BiLocationPlus className="text-blue-500 text-xl" />
-            <span className="text-sm" style={{ color: "blue" }}>{job.location}</span>
-          </div>
-        </div>
-        <button
 
-          onClick={() => {
-            router.push("/user/view-job");
-          }}
+        {/* Form */}
+        <form 
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-4"
+        >
+          <Input
+            in_cls="w-full"
+            t_cls="text-gray-700"
+            title="Email"
+            name="email"
+            type="email"
+            error=""
+            placeholder="Enter your email"
+            register={register}
+          />
 
-          className="
-              bg-green-100 
-              text-green-800 
-              text-sm 
-              px-4 
-              py-2 
-              rounded-lg 
-              font-medium 
-              hover:bg-green-200 
-              hover:scale-105 
-              transition 
-              duration-200 
-              shadow-sm
-              focus:outline-none
-            ">
-          View Job Details
-        </button>
+          <Input
+            in_cls="w-full"
+            t_cls="text-gray-700"
+            title="Password"
+            name="password"
+            type="password"
+            error=""
+            placeholder="Enter your password"
+            register={register}
+          />
+
+          <div className="flex justify-between items-center text-sm">
+            <label className="flex items-center gap-2 text-gray-600 cursor-pointer">
+              <input type="checkbox" className="accent-green-500 text-white" />
+              Remember me
+            </label>
+            <span className="text-green-600 font-medium hover:underline cursor-pointer">
+              Forgot Password?
+            </span>
+          </div>
+
+          <Button
+            b_cls="w-full bg-green-500 hover:bg-green-400 text-white font-semibold py-3 rounded-lg shadow-md transition-all duration-300"
+            t_cls="text-base"
+            title="Sign In"
+            name="loginBtn"
+            type="submit"
+            loading={false}
+          />
+        </form>
+
+
+        <p className="text-sm mt-6 text-center text-gray-500">
+          Don’t have an account?{" "}
+          <span className="text-green-600 font-semibold hover:underline cursor-pointer" 
+          onClick={()=>{
+            router.push("/sign-up")
+          }}>
+            Sign Up
+          </span>
+        </p>
       </div>
     </div>
   )
 }
+
+export default Signin;
