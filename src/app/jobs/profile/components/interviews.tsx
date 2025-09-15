@@ -31,7 +31,7 @@ const Interviews = () => {
           } />
       }
       {/* Candidate Info */}
-      <div className="bg-white shadow-lg rounded-2xl p-6 flex items-center justify-between">
+      <div className="bg-white shadow rounded-2xl p-6 flex items-center justify-between">
         <div>
           <h2 className="text-xl font-bold">Ali Khan</h2>
           <p className="text-gray-600">Frontend Developer – 3 Years Exp</p>
@@ -47,7 +47,7 @@ const Interviews = () => {
       </div>
 
       {/* Interview Details */}
-      <div className="bg-white shadow-lg rounded-2xl p-6">
+      <div className="bg-white shadow rounded-2xl p-6">
 
         {scheduled ? (
           <div className="space-y-3">
@@ -103,7 +103,7 @@ const Interviews = () => {
       </div>
 
       {/* Notes Section */}
-      <div className="bg-white shadow-lg rounded-2xl p-6">
+      <div className="bg-white shadow rounded-2xl p-6">
         <h3 className="text-lg font-semibold mb-2">Interview Notes</h3>
         <textarea
           placeholder="Write feedback about the candidate..."
@@ -146,7 +146,7 @@ const InterviewScheduleModal = ({
   };
 
   return (<div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-    <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-6">
+    <div className="bg-white rounded-2xl shadow w-full max-w-md p-6">
       <h2 className="text-xl font-bold mb-4">Schedule Interview</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

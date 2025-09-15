@@ -30,8 +30,6 @@ const CreateJob = () => {
         <div className='flex items-center justify-center relative '>
 
           <div className='w-fit relative '>
-
-
             <img src={setting.imgUrl} alt="Logo" width={100} height={100} className='rounded  p-1 object-contain' />
             <div className='w-fit   '>
               <input className='opacity-0 absolute  w-[20px] h-[20px] bottom-[-10] right-[-10] z-10' type='file'
@@ -58,22 +56,8 @@ const CreateJob = () => {
 
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div className='flex gap-3'>
+   
+        <div className='flex gap-3 mt-14'>
 
           <Input
             in_cls="w-full"
