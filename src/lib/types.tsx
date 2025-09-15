@@ -9,3 +9,11 @@ export interface InputTypes extends ButtonType {
     placeholder: string,
     register: UseFormRegister<any>;
 }
+
+export type FormData = {
+  date: string;
+  time: string;
+  mode: "online" | "offline";
+  link?: string;
+  location?: string;
+};

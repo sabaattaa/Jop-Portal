@@ -23,3 +23,24 @@ export const signUpSchema = Yup.object().shape({
     .oneOf([Yup.ref("password")], "Passwords must match")
     .required("Confirm Password is required"),
 });
+
+
+export const profileSchema=Yup.object().shape({
+
+experience : Yup.string()
+    .required("Experience is required"),
+
+skils : Yup.string()
+    .required("Skils is required"),
+    
+portfolio : Yup.string()
+    .required("portfolio is required"),
+    
+github : Yup.string()
+    .required("github is required"),
+    
+linkedin : Yup.string()
+    .required("linkedin is required"),
+    
+
+})

@@ -3,7 +3,7 @@ import { InputTypes } from "@/lib/types";
 import React, { useState } from "react";
 import { BsEye,   BsEyeSlash } from "react-icons/bs";
  
-const Input = (props: InputTypes) => {
+const TextArea = (props: InputTypes) => {
     const { in_cls, t_cls, title, name, type, placeholder,register, error } = props;
 
     const [setting, setSetting] = useState({
@@ -24,11 +24,10 @@ const Input = (props: InputTypes) => {
             )}
 
             <div className="flex w-full relative ">
-                <input
+                <textarea
                 {...register(name)}
                     id={name}
-                    name={name}
-                    type={setting.filedType}
+                    name={name} 
                     placeholder={placeholder}
                     className={`w-full rounded-md border border-gray-200 px-3 py-2 text-sm  outline-none
           placeholder:text-gray-400 focus:border-green-100 focus:ring-1 focus:ring-green-100 transition-all ${in_cls}`}
@@ -77,4 +76,4 @@ const Input = (props: InputTypes) => {
     );
 };
 
-export default Input;
+export default TextArea;
